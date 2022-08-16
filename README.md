@@ -34,6 +34,8 @@ The data compare tool helps in validating the migrated data. Source will be eith
 -  Compare partial data using SQL Filter.
 -  Option to set SSL Mode for target database.
 -  Compares Clob and Blob data types also.
+-  Use secrets for Database authentication 
+-  Data Validation based on the primary key columns passed to tool 
 
 ## High Level Design
 
@@ -83,6 +85,7 @@ Fields to understand after launching the application.
 -  Provide Output folder path to write the report files in this folder. Default it will write to the folder from where the tool is executed.
 -  Provide Job Name, the report will be named with this Job name. The date and time will be append to this Job Name. Default it will give 'data_comparison_result' as Job name.
 -  Provide SQL Filter, this value will be used to filter the data from fetch for comparison.
+ - Provide Primray key columns, this value isxz be used to identify the data uniquely from databases.
 
 
 ## Creating an executable jar
@@ -146,6 +149,7 @@ Required arguments:
 --schemaName : Database schema(s) single or comma separated. e.g:- "xxx,yyy,zzz"
 --chunkSize : No of rows to fetch from a table for comparison. Default value is 10000, max value is 1000000
 --noofParrallelChunks : No of parallel chunks to fetch for comparison. Default value is 1, max value is 10.
+
 ```
 
 
@@ -162,6 +166,8 @@ Optional arguments:
 --jobName : The report will be named with this Job name. The date and time will be append to this Job Name. Default it will give 'data_comparison_result' as Job name.
 --outputFolderPath : Path to write the report files in this folder. Default it will write to the folder from where the tool is executed.
 --sqlFilter : Filter the data from fetch for comparison
+--primaryKey=Tablename:<column name witnin concat option>
+      example: --primaryKey=<Test>:concat(concat(col1,col2),col3)
 ```
 
 ## Output
